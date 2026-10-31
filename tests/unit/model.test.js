@@ -15,6 +15,10 @@ describe('TodoService Unit Tests', () => {
         // TODO: Call the addTodo method with some text.
         // Then, assert that the service's todos array has a length of 1.
         // Assert that the text of the first todo matches the input text.
+        service.addTodo('Buy milk');
+
+        expect(service.getTodos()).toHaveLength(1);
+        expect(service.getTodos()[0].text).toBe('Buy milk');
     });
 
     test('should toggle the completed state of a todo', () => {
@@ -22,16 +26,33 @@ describe('TodoService Unit Tests', () => {
         // Then, get its ID and call the toggleTodoComplete method.
         // Assert that the 'completed' property of that todo is now true.
         // Call toggleTodoComplete again and assert that it's false.
+        service.addTodo('Read a book');
+        const todo = service.getTodos()[0];
+
+        service.toggleTodoComplete(todo.id);
+        expect(service.getTodos()[0].completed).toBe(true);
+
+        service.toggleTodoComplete(todo.id);
+        expect(service.getTodos()[0].completed).toBe(false);
     });
 
     test('should remove a todo', () => {
         // TODO: Add a todo.
         // Get its ID and call the removeTodo method.
         // Assert that the service's todos array is now empty (length of 0).
+        service.addTodo('Clean the desk');
+        const todo = service.getTodos()[0];
+
+        service.removeTodo(todo.id);
+
+        expect(service.getTodos()).toHaveLength(0);
     });
 
     test('should not add a todo if text is empty', () => {
         // TODO: Call addTodo with an empty string.
         // Assert that the todos array still has a length of 0.
+        service.addTodo('');
+
+        expect(service.getTodos()).toHaveLength(0);
     });
 });
