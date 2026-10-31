@@ -6,8 +6,9 @@ describe('TodoService Unit Tests', () => {
     beforeEach(() => {
         // Create a new service instance for each test to ensure isolation
         service = new TodoService();
-        // This is a bit of a hack to reset the singleton for testing purposes
+        // Reset the singleton state for testing
         service.todos = [];
+        service.observers = [];
     });
 
     test('should add a new todo', () => {
